@@ -56,12 +56,12 @@ select SPACE(ManagerID * 4) + cte.EmployeeName as Hierarchy, * from cte
 
     union all
 
-    -- Рекурсивное объединение: находим подчиненных и увеличиваем уровень
+
     select e.EmployeeID, e.EmployeeName, e.ManagerID, cte.level +1
     from Employees e
     join cte on e.ManagerID = cte.EmployeeID
 )
--- Считаем количество сотрудников на каждом уровне
+
 select cte.level, COUNT(*) as EmployeeCount
 from cte
 group by level
